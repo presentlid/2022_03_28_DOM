@@ -85,7 +85,7 @@ window.dom = {
             // interface: dom.style(div, color, 'red');
             node.style[name] = value;
         } else if (arguments.length === 2) {
-            if (typeof name === String) {
+            if (typeof name === 'string') {
                 // interface: dom.style(div, color);
                 return node.style[name];
             } else if (name instanceof Object) {
