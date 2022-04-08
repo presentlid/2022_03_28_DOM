@@ -22,25 +22,25 @@ DOM 事件机制（包括“事件捕获”和“事件冒泡”）：
 * 开发者自行把监听函数放在捕获阶段还是冒泡阶段。当然，你作死把两个阶段都写上也行。
 * 调用顺序特例：如果只有一个元素被监听，且该元素即写了“捕获”函数和又写了“冒泡”函数，那么此时先“捕获”后“冒泡”准则失效，变成“先监听谁则先执行谁”。
 
-## 事件绑定 API
+### 事件绑定 API
 * IE 5：baba.attachEvent('onclick', fn) // 冒泡
 * 网景：baba.addEventListener('click',fn) // 捕获
 * W3C：baba.addEventListener('click',fn,boolean)。boolean 不写，则默认为 falsy 值，默认则使用“事件冒泡”方式调用函数；boolean 赋值为 true，则使用“事件捕获”方式调用函数。
 
-## target 和 currentTarget
+### target 和 currentTarget
 定义：
 * event.target 是用户操作的元素
 * event.currentTarget 是程序员监听的元素
 * 举例：div > span{内容}。用户点击内容。event.target 就是 span，event.currentTarget 就是 div。
 
-## 取消冒泡
+### 取消冒泡
 event.stopPropagation() 函数可以中断冒泡，浏览器到这个元素之后不再向上走，一般用于某些独立的组件。
 
 mdn 在事件描述中：
 * Bubble 意思是该事件是否冒泡，<strong>所有冒泡都可以取消</strong>。
 * Cancelable 意思是开发者是否可以<strong>阻止默认事件</strong>，<strong>Cancelable 与冒泡无关</strong>。
 
-## scroll 滚动事件
+### scroll 滚动事件
 scroll 是“不可阻止默认动作”。要阻止滚动，先找准滚动条所在的元素，然后阻止 wheel 和 touchstart 的默认动作，以及 CSS 让滚动条 width: 0。
 
 ``` js
@@ -66,7 +66,7 @@ scroll 是“不可阻止默认动作”。要阻止滚动，先找准滚动条�
 
 使用 overflow: hidden 可以直接取消滚动条，但此时 JS 依然可以修改 scrollTop。
 
-## 更多事件
+### 更多事件
 * 浏览器自带事件：超过100件事件，具体参考 <a href='https://developer.mozilla.org/zh-CN/docs/Web/Events'>mdn</a>。
 * 开发者可以自定义事件，使用 CustomEvent 函数创建事件。
 
@@ -91,7 +91,7 @@ scroll 是“不可阻止默认动作”。要阻止滚动，先找准滚动条�
 
 总结事件委托优点：1.省监听数，省内存；2.可以监听动态元素。
 
-## 封装事件委托
+### 封装事件委托
 要求：
 * 写出函数 on('click','#testDiv','li',fn)
 * 当用户点击 #testDiv 里的 li 元素时，调用 fn 函数
